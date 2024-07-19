@@ -5,7 +5,7 @@ export default defineComponent({
   name: "WeatherApp",
   data() {
     return {
-      locations: [],
+      locations: getWeatherData(),
     };
   },
 
@@ -13,10 +13,6 @@ export default defineComponent({
     weatherIcons() {
       return WeatherConditionIcons;
     }
-  },
-
-  mounted() {
-    this.locations = getWeatherData();
   },
 
   methods: {
