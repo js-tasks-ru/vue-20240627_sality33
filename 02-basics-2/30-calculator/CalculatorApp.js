@@ -1,6 +1,6 @@
 import { computed, defineComponent, ref } from "vue";
 
-const useMathOperations = () => {
+const getMathOperations = () => {
 
   const sum = (a, b) => a + b;
   const subtract = (a, b) => a - b;
@@ -14,21 +14,17 @@ const useMathOperations = () => {
     divide,
   };
 };
+const operations = getMathOperations();
 
 export default defineComponent({
   name: "CalculatorApp",
 
   setup() {
-    const operations = useMathOperations();
     const numA = ref(0);
     const numB = ref(0);
     const operation = ref(null);
     const result = computed(() => operations[operation.value]?.(numA.value, numB.value) ?? 0);
 
-    /**
-     * Обработчик радио-кнопки
-     * @param {InputEvent} event
-     */
     const onRadioChange = (event) => {
       operation.value = event.target.value;
     };
