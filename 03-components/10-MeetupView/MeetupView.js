@@ -25,12 +25,6 @@ export default defineComponent({
     }
   },
 
-  watch: {
-    meetup(v) {
-      console.log(v);
-    }
-  },
-
   template: `
     <div>
 
@@ -48,15 +42,12 @@ export default defineComponent({
 
             <h2>Программа</h2>
 
-            <!-- Программа митапа -->
-            <!-- Или при пустой программе - сообщение "Программа пока пуста..." в UiAlert -->
             <MeetupAgenda v-if="meetup.agenda?.length" :agenda="meetup.agenda"/>
             <UiAlert v-else>Программа пока пуста...</UiAlert>
 
           </div>
           <div class="meetup__aside">
 
-            <!-- Краткая информация о митапе -->
             <MeetupInfo
               :date="meetup.date"
               :organizer="meetup.organizer"
