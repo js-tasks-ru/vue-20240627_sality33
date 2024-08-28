@@ -1,7 +1,7 @@
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'EmailListItem',
+  name: "EmailListItem",
 
   props: {
     email: {
@@ -15,10 +15,24 @@ export default defineComponent({
     },
   },
 
+  emits: ["removeEmail"],
+
+  setup(_, { emit }) {
+    const removeEmail = () => emit("removeEmail");
+
+    return { removeEmail };
+  },
+
   template: `
     <li :class="{ marked }">
       {{ email }}
-      <button type="button" aria-label="Удалить" @click.stop>❌</button>
+      <button
+        type="button"
+        aria-label="Удалить"
+        @click.stop="removeEmail"
+      >
+        ❌
+      </button>
     </li>
   `,
-})
+});
