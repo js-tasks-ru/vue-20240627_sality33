@@ -33,6 +33,8 @@ export default defineComponent({
       get: () => props.count,
       set: (value) => emit("update:count", value),
     })
+    const reachedMin = computed(() => countModel.value === props.min);
+    const reachedMax = computed(() => countModel.value === props.max);
 
     const increment = () => countModel.value += 1;
     const decrement = () => countModel.value -= 1;
@@ -41,14 +43,16 @@ export default defineComponent({
       increment,
       decrement,
       countModel,
+      reachedMin,
+      reachedMax,
     }
   },
 
   template: `
     <div class="counter">
-      <UiButton aria-label="Decrement" :disabled="count === min" @click="decrement">➖</UiButton>
+      <UiButton aria-label="Decrement" :disabled="reachedMin" @click="decrement">➖</UiButton>
       <span class="count" data-testid="count">{{ countModel }}</span>
-      <UiButton aria-label="Increment" :disabled="count === max" @click="increment">➕</UiButton>
+      <UiButton aria-label="Increment" :disabled="reachedMax" @click="increment">➕</UiButton>
     </div>
   `,
 })
