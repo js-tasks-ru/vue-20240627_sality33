@@ -58,8 +58,7 @@ export default defineComponent({
               type="radio"
               name="meetupId"
               :value="el.value"
-              :checked="el.value === selectedId"
-              @change="selectMeetup(el.value)"
+              v-model="selectedId"
             />
             <label
               :for="el.id"

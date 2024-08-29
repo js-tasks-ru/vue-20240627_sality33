@@ -25,12 +25,7 @@ export default defineComponent({
     const operation = ref(null);
     const result = computed(() => operations[operation.value]?.(numA.value, numB.value) ?? 0);
 
-    const onRadioChange = (event) => {
-      operation.value = event.target.value;
-    };
-
     return {
-      onRadioChange,
       numA,
       numB,
       result,
@@ -47,30 +42,40 @@ export default defineComponent({
       />
 
       <div class="calculator__operators">
-        <label><input
-          type="radio"
-          name="operator"
-          value="sum"
-          @change="onRadioChange"
-        />➕</label>
-        <label><input
-          type="radio"
-          name="operator"
-          value="subtract"
-          @change="onRadioChange"
-        />➖</label>
-        <label><input
-          type="radio"
-          name="operator"
-          value="multiply"
-          @change="onRadioChange"
-        />✖</label>
-        <label><input
-          type="radio"
-          name="operator"
-          value="divide"
-          @change="onRadioChange"
-        />➗</label>
+        <label>
+          <input
+            type="radio"
+            name="operator"
+            value="sum"
+            v-model="operation"
+          />➕</label>
+        <label>
+          <input
+            type="radio"
+            name="operator"
+            value="subtract"
+            v-model="operation"
+          />
+          ➖
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="operator"
+            value="multiply"
+            v-model="operation"
+          />
+          ✖
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="operator"
+            value="divide"
+            v-model="operation"
+          />
+          ➗
+        </label>
       </div>
 
       <input
