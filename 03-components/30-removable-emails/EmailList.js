@@ -1,8 +1,8 @@
-import { defineComponent } from 'vue'
-import EmailListItem from './EmailListItem.js'
+import { defineComponent } from "vue";
+import EmailListItem from "./EmailListItem.js";
 
 export default defineComponent({
-  name: 'EmailList',
+  name: "EmailList",
 
   components: {
     EmailListItem,
@@ -15,14 +15,26 @@ export default defineComponent({
     },
   },
 
+  emits: ["removeEmailByIndex"],
+
+  setup(_, { emit }) {
+    const removeEmailByIndex = (index) => emit("removeEmailByIndex", index);
+
+    return { removeEmailByIndex };
+  },
+
   template: `
-    <ul class="emails-list unstyled-list" aria-label="Emails">
+    <ul
+      class="emails-list unstyled-list"
+      aria-label="Emails"
+    >
       <EmailListItem
         v-for="({ email, isMarked }, index) in emails"
         :key="email"
         :email="email"
         :marked="isMarked"
+        @removeEmail="removeEmailByIndex(index)"
       />
     </ul>
   `,
-})
+});
